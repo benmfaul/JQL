@@ -1,0 +1,173 @@
+{ "db": { "xxx":
+[
+  {
+    "id": 0,
+    "acctnum": 239190,
+    "customer": "ben",
+    "product": "hammer",
+    "payment":  {
+    	"paytype": "visa",
+    	"acct": 123456,
+    	"payment": 100.00
+    },
+    "alsoOwns": ['wrench','drill','bike'],
+    "listOfNumbers": [1,2,3,[100,200],4,5,'string'],
+    "amount": 4
+  },
+  {
+    "id": 1,
+     "acctnum": 239190,
+    "customer": "ben",
+    "product": "saw",
+        "payment":  {
+    	"paytype": "visa",
+    	"acct": 123456,
+    	"payment": 120.00
+    },
+    "alsoOwns": ['wrench','drill','bike','hammer'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 2
+  },
+   {
+    "id": 2,
+    "acctnum": 239190,
+    "customer": "ben",
+    "product": "chisel",
+        "payment":  {
+    	"paytype": "visa",
+    	"acct": 123456,
+    	"payment": 130.00
+    },
+    "alsoOwns": ['wrench','drill','bike','hammer','chisel'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 3
+  },
+    {
+    "id": 3,
+    "acctnum": 239190,
+    "customer": "ben",
+    "product": "hammer",
+        "payment":  {
+    	"paytype": "cash",
+    	"acct": 0,
+    	"payment": 99.00
+    },
+    "alsoOwns": ['wrench','drill','bike','hammer','chisel'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 1
+  },
+    {
+    "id": 4,
+    "acctnum": 284958,
+    "customer": "joe",
+    "product": "drill",
+    "payment":  {
+    	"paytype": "visa",
+    	"acct": 654321,
+    	"payment": 100.00
+    },
+    "listOfNumbers": [1,2,3,4,5],
+   "alsoOwns": ['m60'],
+    "amount": 1
+  },
+    {
+    "id": 5,
+    "acctnum": 284958,
+    "customer": "joe",
+    "product": "m16",
+    "payment":  {
+    	"paytype": "visa",
+    	"acct": 654321,
+    	"payment": 500.00
+    },
+    "alsoOwns": ['m60','drill'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 1
+  },
+    {
+    "id": 6,
+    "acctnum": 284958,
+    "customer": "joe",
+    "product": "toolbelt",
+    "payment":  {
+    	"paytype": "mastercard",
+    	"acct": 11121,
+    	"payment": 100.00
+    },
+   " alsoOwns": ['m60','drill','m16'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 3
+  },
+    {
+    "id": 7,
+    "acctnum": 584392,
+    "customer": "clarissa",
+    "product": "gi",
+    "payment":  {
+    	"paytype": "cash",
+    	"acct": 0,
+    	"payment": 100.00
+    },
+    "alsoOwns": ['video'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 27
+  },
+    {
+    "id": 8,
+    "acctnum": 584392,
+    "customer": "clarissa",
+    "product": "bike",
+    "payment":  {
+    	"paytype": "cash",
+    	"acct": 0,
+    	"payment": 100.00
+    },
+    "alsoOwns": ['video','gi'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 3
+  },
+    {
+    "id": 9,
+    "acctnum": 584392,
+    "customer": "clarissa",
+    "product": "hammer",
+    "payment":  {
+    	"paytype": "cash",
+    	"acct": 0,
+    	"payment": 100.00
+    },
+    "alsoOwns": ['video','gi','bike'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 4
+  },
+    {
+    "id": 10,
+    "acctnum": 483284,
+    "customer": "jt",
+    "product": "pc",
+    "payment":  {
+    	"paytype": "discover",
+    	"acct": 555555,
+    	"payment": 100.00
+    },
+    "alsoOwns": ['printer'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 3
+  },
+    {
+    "id": 11,
+    "acctnum": 483284,
+    "customer": "jt",
+    "product": "hammer",
+    "payment":  {
+    	"paytype": "discover",
+    	"acct": 0,
+    	"payment": 99.00
+    },
+    "alsoOwns": ['printer','pc'],
+    "listOfNumbers": [1,2,3,4,5],
+    "amount": 1
+  }
+]
+}
+}

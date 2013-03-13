@@ -1,0 +1,60 @@
+<project name="jql" default="build-jql" basedir="./">
+	
+	<property environment="env" />
+	
+	<property name="version"                 value="-0.0.1" />
+
+	<property name="app.name"                 value="jql" />
+	<property name="build.dir"                value="${basedir}/build" />
+	<property name="build.classes.dir"        value="${basedir}/build/classes" />
+	<property name="applib.dir"               value="${basedir}/libs" />
+	<property name="javadoc.home"             value="${basedir}/javadoc" />
+
+ 
+	<!-- need to add in details of src.dir -->
+	<property name="src.dir" value="${basedir}" />
+	
+
+	<path id="base.libraries">
+		<pathelement location="${build.classes.dir}" />
+		<fileset dir="${applib.dir}/">
+			<include name="*.jar" />		
+		</fileset>
+	</path>
+	
+	<target name="clean">
+		<delete dir="${build.dir}" />
+	</target>
+
+	<target name="validate">
+		<available property="classpath_id" value="base.libraries" file="${applib.dir}/js-17.jar"/>
+	</target>
+
+	<target name="prepare" depends="clean,validate">	
+		<mkdir dir="${build.classes.dir}" />
+		<property name="classpath" refid="${classpath_id}" /> 
+	</target>
+
+	<target name="compile" depends="prepare">
+		<javac srcdir="${basedir}/src" destdir="${build.classes.dir}" classpath="${build.classes.dir}" debug="on" optimize="off" deprecation="on">
+			<classpath path="${classpath}" />
+		</javac>
+	
+	</target>
+
+	<target name="javadoc" depends="prepare">
+		<javadoc  destdir="${javadoc.home}">
+    		<packageset dir="src" defaultexcludes="yes">
+      			<include name="**"/>
+    		</packageset>
+		</javadoc>
+		
+	</target>
+
+	<target name="build-jql" depends="compile">
+		<jar destfile="${applib.dir}/${app.name}${version}.jar">
+			<fileset dir="${build.dir}/classes"
+				includes="**/*.class" />
+		</jar>
+	</target>
+</project>
