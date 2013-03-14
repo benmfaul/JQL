@@ -35,6 +35,7 @@ import org.gibello.zql.ZFromItem;
 import org.gibello.zql.ZDelete;
 import org.gibello.zql.ZDropTable;
 import org.gibello.zql.ZInsert;
+import org.gibello.zql.ZListTables;
 import org.gibello.zql.ZLoadFile;
 import org.gibello.zql.ZLockTable;
 import org.gibello.zql.ZQuery;
@@ -338,6 +339,10 @@ public class Jql {
 		records.add(list);
 	}
 
+	/**
+	 * Adds a new table to the currently used database.
+	 * @param name Strting. The name of the new table.
+	 */
 	public void addTable(String name) {
 		List<Map> table = new ArrayList<Map>();
 		tableMap.put(name, table);
@@ -510,6 +515,9 @@ public class Jql {
 		} else if (st instanceof ZUnLockTable) {
 			new JUnLockTable(this, (ZUnLockTable) st);
 			return;
+		} else if (st instanceof ZListTables) {
+			doListTables((ZListTables)st);
+			return;
 		}
 	}
 
@@ -612,6 +620,17 @@ public class Jql {
 		}
 		dbMap.put(db, tableMap);
 		return tableList();
+	}
+	
+	/**
+	 * Links the parser production to listTables() method.
+	 * @param z ZListTables. The object that represents the return from the listTables() method to the SQLproduction.
+	 * @throws Exception
+	 */
+	void doListTables(ZListTables z) throws Exception {
+		List theList = listTables();
+		z.addTablesInfo(theList);
+		intermediateResult = theList;
 	}
 
 	/**

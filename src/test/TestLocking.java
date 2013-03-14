@@ -94,10 +94,15 @@ class Runner implements Runnable {
 		try {
 			jql.execute("lock table sales in exclusive mode;");
 			System.out.println("" + this + " Got the lock");
+			
+			System.out.println("> " + jql.locked("sales"));
 			locked = true;
 		} catch (Exception e) {
 			System.out.println("" + this + " Did not the lock");
 			locked = false;
+			
+			System.out.println("====> " + jql.locked("sales"));
+			
 			return;
 		}
 		while(halt == false) {

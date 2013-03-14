@@ -117,6 +117,7 @@ TOKEN: /* SQL Keywords. prefixed with K_ to avoid name clashes */
 |   <K_EXCLUSIVE:"EXCLUSIVE">
 |   <K_EXISTS:"EXISTS">
 |   <K_EXIT:"EXIT">
+|	<K_LISTTABLES:"LISTTABLES">
 |   <K_FLOAT:"FLOAT">
 |   <K_FOR:"FOR">
 |   <K_FROM:"FROM">
@@ -270,6 +271,8 @@ ZStatement SQLStatement():
     |
     s = UpdateStatement() { return s; }
     |
+    s = ListTablesStatement() { return s; }
+    |
     ( "EXIT" | "QUIT" ) ";" { return null; }
 }
 
@@ -323,6 +326,16 @@ ZUse UseStatement():
   { return use; }
 }
 
+// LISTTABLES database Statement ::= LISTTABLES;
+ZListTables ListTablesStatement():
+{
+  ZListTables list = new ZListTables();
+
+}
+{
+  "LISTTABLES"  { list.getTableInfo(); } ";"
+  { return list; }
+}
 
 // DropStatement ::= COMMIT [WORK] [COMMENT <comment>];
 ZDropTable DropStatement():

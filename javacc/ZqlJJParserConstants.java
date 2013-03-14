@@ -57,141 +57,143 @@ public interface ZqlJJParserConstants {
   /** RegularExpression Id. */
   int K_EXIT = 27;
   /** RegularExpression Id. */
-  int K_FLOAT = 28;
+  int K_LISTTABLES = 28;
   /** RegularExpression Id. */
-  int K_FOR = 29;
+  int K_FLOAT = 29;
   /** RegularExpression Id. */
-  int K_FROM = 30;
+  int K_FOR = 30;
   /** RegularExpression Id. */
-  int K_GROUP = 31;
+  int K_FROM = 31;
   /** RegularExpression Id. */
-  int K_HAVING = 32;
+  int K_GROUP = 32;
   /** RegularExpression Id. */
-  int K_IN = 33;
+  int K_HAVING = 33;
   /** RegularExpression Id. */
-  int K_CONTAINS = 34;
+  int K_IN = 34;
   /** RegularExpression Id. */
-  int K_INSERT = 35;
+  int K_CONTAINS = 35;
   /** RegularExpression Id. */
-  int K_INTEGER = 36;
+  int K_INSERT = 36;
   /** RegularExpression Id. */
-  int K_INTERSECT = 37;
+  int K_INTEGER = 37;
   /** RegularExpression Id. */
-  int K_INTO = 38;
+  int K_INTERSECT = 38;
   /** RegularExpression Id. */
-  int K_IS = 39;
+  int K_INTO = 39;
   /** RegularExpression Id. */
-  int K_LIKE = 40;
+  int K_IS = 40;
   /** RegularExpression Id. */
-  int K_LIMIT = 41;
+  int K_LIKE = 41;
   /** RegularExpression Id. */
-  int K_LOAD = 42;
+  int K_LIMIT = 42;
   /** RegularExpression Id. */
-  int K_LOCK = 43;
+  int K_LOAD = 43;
   /** RegularExpression Id. */
-  int K_UNLOCK = 44;
+  int K_LOCK = 44;
   /** RegularExpression Id. */
-  int K_MAX = 45;
+  int K_UNLOCK = 45;
   /** RegularExpression Id. */
-  int K_MIN = 46;
+  int K_MAX = 46;
   /** RegularExpression Id. */
-  int K_MINUS = 47;
+  int K_MIN = 47;
   /** RegularExpression Id. */
-  int K_MODE = 48;
+  int K_MINUS = 48;
   /** RegularExpression Id. */
-  int K_NATURAL = 49;
+  int K_MODE = 49;
   /** RegularExpression Id. */
-  int K_NOT = 50;
+  int K_NATURAL = 50;
   /** RegularExpression Id. */
-  int K_NOWAIT = 51;
+  int K_NOT = 51;
   /** RegularExpression Id. */
-  int K_NULL = 52;
+  int K_NOWAIT = 52;
   /** RegularExpression Id. */
-  int K_NUMBER = 53;
+  int K_NULL = 53;
   /** RegularExpression Id. */
-  int K_OF = 54;
+  int K_NUMBER = 54;
   /** RegularExpression Id. */
-  int K_OFFSET = 55;
+  int K_OF = 55;
   /** RegularExpression Id. */
-  int K_ONLY = 56;
+  int K_OFFSET = 56;
   /** RegularExpression Id. */
-  int K_OR = 57;
+  int K_ONLY = 57;
   /** RegularExpression Id. */
-  int K_ORDER = 58;
+  int K_OR = 58;
   /** RegularExpression Id. */
-  int K_PRIOR = 59;
+  int K_ORDER = 59;
   /** RegularExpression Id. */
-  int K_QUIT = 60;
+  int K_PRIOR = 60;
   /** RegularExpression Id. */
-  int K_READ = 61;
+  int K_QUIT = 61;
   /** RegularExpression Id. */
-  int K_REAL = 62;
+  int K_READ = 62;
   /** RegularExpression Id. */
-  int K_ROLLBACK = 63;
+  int K_REAL = 63;
   /** RegularExpression Id. */
-  int K_ROW = 64;
+  int K_ROLLBACK = 64;
   /** RegularExpression Id. */
-  int K_SAVE = 65;
+  int K_ROW = 65;
   /** RegularExpression Id. */
-  int K_SELECT = 66;
+  int K_SAVE = 66;
   /** RegularExpression Id. */
-  int K_SET = 67;
+  int K_SELECT = 67;
   /** RegularExpression Id. */
-  int K_SHARE = 68;
+  int K_SET = 68;
   /** RegularExpression Id. */
-  int K_SMALLINT = 69;
+  int K_SHARE = 69;
   /** RegularExpression Id. */
-  int K_START = 70;
+  int K_SMALLINT = 70;
   /** RegularExpression Id. */
-  int K_SUM = 71;
+  int K_START = 71;
   /** RegularExpression Id. */
-  int K_TABLE = 72;
+  int K_SUM = 72;
   /** RegularExpression Id. */
-  int K_TRANSACTION = 73;
+  int K_TABLE = 73;
   /** RegularExpression Id. */
-  int K_UNION = 74;
+  int K_TRANSACTION = 74;
   /** RegularExpression Id. */
-  int K_UPDATE = 75;
+  int K_UNION = 75;
   /** RegularExpression Id. */
-  int K_USE = 76;
+  int K_UPDATE = 76;
   /** RegularExpression Id. */
-  int K_VALUES = 77;
+  int K_USE = 77;
   /** RegularExpression Id. */
-  int K_VARCHAR2 = 78;
+  int K_VALUES = 78;
   /** RegularExpression Id. */
-  int K_VARCHAR = 79;
+  int K_VARCHAR2 = 79;
   /** RegularExpression Id. */
-  int K_WHERE = 80;
+  int K_VARCHAR = 80;
   /** RegularExpression Id. */
-  int K_WITH = 81;
+  int K_WHERE = 81;
   /** RegularExpression Id. */
-  int K_WORK = 82;
+  int K_WITH = 82;
   /** RegularExpression Id. */
-  int K_WRITE = 83;
+  int K_WORK = 83;
   /** RegularExpression Id. */
-  int S_NUMBER = 84;
+  int K_WRITE = 84;
   /** RegularExpression Id. */
-  int FLOAT = 85;
+  int S_NUMBER = 85;
   /** RegularExpression Id. */
-  int INTEGER = 86;
+  int FLOAT = 86;
   /** RegularExpression Id. */
-  int DIGIT = 87;
+  int INTEGER = 87;
   /** RegularExpression Id. */
-  int LINE_COMMENT = 88;
+  int DIGIT = 88;
   /** RegularExpression Id. */
-  int MULTI_LINE_COMMENT = 89;
+  int LINE_COMMENT = 89;
   /** RegularExpression Id. */
-  int S_IDENTIFIER = 90;
+  int MULTI_LINE_COMMENT = 90;
   /** RegularExpression Id. */
-  int LETTER = 91;
+  int S_IDENTIFIER = 91;
   /** RegularExpression Id. */
-  int SPECIAL_CHARS = 92;
+  int LETTER = 92;
   /** RegularExpression Id. */
-  int S_BIND = 93;
+  int SPECIAL_CHARS = 93;
   /** RegularExpression Id. */
-  int S_CHAR_LITERAL = 94;
+  int S_BIND = 94;
   /** RegularExpression Id. */
-  int S_QUOTED_IDENTIFIER = 95;
+  int S_CHAR_LITERAL = 95;
+  /** RegularExpression Id. */
+  int S_QUOTED_IDENTIFIER = 96;
 
   /** Lexical state. */
   int DEFAULT = 0;
@@ -226,6 +228,7 @@ public interface ZqlJJParserConstants {
     "\"EXCLUSIVE\"",
     "\"EXISTS\"",
     "\"EXIT\"",
+    "\"LISTTABLES\"",
     "\"FLOAT\"",
     "\"FOR\"",
     "\"FROM\"",

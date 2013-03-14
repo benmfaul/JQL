@@ -91,19 +91,19 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         throw new ParseException();
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 96:
-        jj_consume_token(96);
+      case 97:
+        jj_consume_token(97);
         jj_consume_token(S_NUMBER);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 97:
-          jj_consume_token(97);
+        case 98:
+          jj_consume_token(98);
           jj_consume_token(S_NUMBER);
           break;
         default:
           jj_la1[1] = jj_gen;
           ;
         }
-        jj_consume_token(98);
+        jj_consume_token(99);
         break;
       default:
         jj_la1[2] = jj_gen;
@@ -141,6 +141,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case K_DELETE:
       case K_DROP:
       case K_EXIT:
+      case K_LISTTABLES:
       case K_INSERT:
       case K_LOAD:
       case K_LOCK:
@@ -218,6 +219,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       s = UpdateStatement();
                             {if (true) return s;}
       break;
+    case K_LISTTABLES:
+      s = ListTablesStatement();
+                                {if (true) return s;}
+      break;
     case K_EXIT:
     case K_QUIT:
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -232,7 +237,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         jj_consume_token(-1);
         throw new ParseException();
       }
-      jj_consume_token(99);
+      jj_consume_token(100);
                               {if (true) return null;}
       break;
     default:
@@ -266,7 +271,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[8] = jj_gen;
       ;
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return t;}
     throw new Error("Missing return statement in function");
   }
@@ -281,7 +286,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
                                 save.addTableName(s);
     tk = jj_consume_token(S_CHAR_LITERAL);
                            save.addFileName(tk.toString());
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return save;}
     throw new Error("Missing return statement in function");
   }
@@ -296,7 +301,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
                                 load.addDbName(s);
     tk = jj_consume_token(S_CHAR_LITERAL);
                            load.addFileName(tk.toString());
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return load;}
     throw new Error("Missing return statement in function");
   }
@@ -309,8 +314,18 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     jj_consume_token(K_USE);
     s = TableReference();
                                use.addDbName(s);
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return use;}
+    throw new Error("Missing return statement in function");
+  }
+
+// LISTTABLES database Statement ::= LISTTABLES;
+  final public ZListTables ListTablesStatement() throws ParseException {
+  ZListTables list = new ZListTables();
+    jj_consume_token(K_LISTTABLES);
+                  list.getTableInfo();
+    jj_consume_token(100);
+    {if (true) return list;}
     throw new Error("Missing return statement in function");
   }
 
@@ -326,18 +341,18 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_2:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[9] = jj_gen;
         break label_2;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       s = TableReference();
                                 v.add(s);
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     drop.addTables(v);  {if (true) return drop;}
     throw new Error("Missing return statement in function");
   }
@@ -355,14 +370,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_3:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[10] = jj_gen;
         break label_3;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       s = TableReference();
                               v.add(s);
     }
@@ -379,7 +394,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[11] = jj_gen;
       ;
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     lck.addTables(v); {if (true) return lck;}
     throw new Error("Missing return statement in function");
   }
@@ -397,18 +412,18 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_4:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[12] = jj_gen;
         break label_4;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       s = TableReference();
                               v.add(s);
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     ulck.addTables(v); {if (true) return ulck;}
     throw new Error("Missing return statement in function");
   }
@@ -436,7 +451,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[14] = jj_gen;
       ;
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return t;}
     throw new Error("Missing return statement in function");
   }
@@ -462,7 +477,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     t.readOnly_ = rdonly; {if (true) return t;}
     throw new Error("Missing return statement in function");
   }
@@ -565,7 +580,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[21] = jj_gen;
       ;
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
     {if (true) return u;}
     throw new Error("Missing return statement in function");
   }
@@ -575,22 +590,22 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   String key;
   ZExp val;
     key = TableColumn();
-    jj_consume_token(100);
+    jj_consume_token(101);
     val = UpdatedValue();
                                                  u.addColumnUpdate(key, val);
     label_5:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[22] = jj_gen;
         break label_5;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       key = TableColumn();
-      jj_consume_token(100);
+      jj_consume_token(101);
       val = UpdatedValue();
       u.addColumnUpdate(key, val);
     }
@@ -601,9 +616,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   final public ZExp UpdatedValue() throws ParseException {
   ZExp e;
     if (jj_2_1(2147483647)) {
-      jj_consume_token(96);
+      jj_consume_token(97);
       e = SelectStatement();
-      jj_consume_token(98);
+      jj_consume_token(99);
                                   {if (true) return e;}
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -621,13 +636,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case S_BIND:
       case S_CHAR_LITERAL:
       case S_QUOTED_IDENTIFIER:
-      case 96:
-      case 109:
+      case 97:
       case 110:
+      case 111:
         e = SQLExpression();
                         {if (true) return e;}
         break;
-      case 113:
+      case 114:
         e = PreparedCol();
                       {if (true) return e;}
         break;
@@ -654,25 +669,25 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     s = TableReference();
                                          ins = new ZInsert(s);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 96:
-      jj_consume_token(96);
+    case 97:
+      jj_consume_token(97);
       s = TableColumn();
                             v = new ArrayList(); v.add(s);
       label_6:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 97:
+        case 98:
           ;
           break;
         default:
           jj_la1[24] = jj_gen;
           break label_6;
         }
-        jj_consume_token(97);
+        jj_consume_token(98);
         s = TableColumn();
                              v.add(s);
       }
-      jj_consume_token(98);
+      jj_consume_token(99);
                                                   ins.addColumns(v);
       break;
     default:
@@ -682,9 +697,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case K_VALUES:
       jj_consume_token(K_VALUES);
-      jj_consume_token(96);
+      jj_consume_token(97);
       v = SQLExpressionList();
-      jj_consume_token(98);
+      jj_consume_token(99);
        ZExpression e = new ZExpression(",");
        e.setOperands(v); ins.addValueSpec(e);
       break;
@@ -697,7 +712,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
          {if (true) return ins;}
     throw new Error("Missing return statement in function");
   }
@@ -728,7 +743,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[28] = jj_gen;
       ;
     }
-    jj_consume_token(99);
+    jj_consume_token(100);
       {if (true) return d;}
     throw new Error("Missing return statement in function");
   }
@@ -737,7 +752,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   final public ZQuery QueryStatement() throws ParseException {
   ZQuery q;
     q = SelectStatement();
-    jj_consume_token(99);
+    jj_consume_token(100);
                                 {if (true) return q;}
     throw new Error("Missing return statement in function");
   }
@@ -750,13 +765,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         s = OracleObjectName();
                              buf.append(s);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 101:
-      jj_consume_token(101);
+    case 102:
+      jj_consume_token(102);
       s = OracleObjectName();
                                    buf.append("." + s);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 101:
-        jj_consume_token(101);
+      case 102:
+        jj_consume_token(102);
         s = OracleObjectName();
                                    buf.append("." + s);
         break;
@@ -795,12 +810,8 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   final public String Relop() throws ParseException {
   Token op;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 100:
-      op = jj_consume_token(100);
-               {if (true) return op.toString();}
-      break;
-    case 102:
-      op = jj_consume_token(102);
+    case 101:
+      op = jj_consume_token(101);
                {if (true) return op.toString();}
       break;
     case 103:
@@ -827,6 +838,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       op = jj_consume_token(108);
                {if (true) return op.toString();}
       break;
+    case 109:
+      op = jj_consume_token(109);
+               {if (true) return op.toString();}
+      break;
     default:
       jj_la1[32] = jj_gen;
       jj_consume_token(-1);
@@ -842,8 +857,8 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     s = OracleObjectName();
                              buf.append(s);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 101:
-      jj_consume_token(101);
+    case 102:
+      jj_consume_token(102);
       s = OracleObjectName();
                                   buf.append("." + s);
       break;
@@ -861,17 +876,17 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_consume_token(S_IDENTIFIER);
       break;
     case S_NUMBER:
-    case 109:
     case 110:
+    case 111:
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 109:
       case 110:
+      case 111:
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 109:
-          jj_consume_token(109);
-          break;
         case 110:
           jj_consume_token(110);
+          break;
+        case 111:
+          jj_consume_token(111);
           break;
         default:
           jj_la1[34] = jj_gen;
@@ -1026,8 +1041,8 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   List v = new ArrayList(8);
   ZSelectItem elem;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 111:
-      jj_consume_token(111);
+    case 112:
+      jj_consume_token(112);
         v.add(new ZSelectItem("*")); {if (true) return v;}
       break;
     case K_AVG:
@@ -1041,22 +1056,22 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     case S_BIND:
     case S_CHAR_LITERAL:
     case S_QUOTED_IDENTIFIER:
-    case 96:
-    case 109:
+    case 97:
     case 110:
+    case 111:
       elem = SelectItem();
                           v.add(elem);
       label_7:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 97:
+        case 98:
           ;
           break;
         default:
           jj_la1[47] = jj_gen;
           break label_7;
         }
-        jj_consume_token(97);
+        jj_consume_token(98);
         elem = SelectItem();
                                v.add(elem);
       }
@@ -1095,9 +1110,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case S_BIND:
       case S_CHAR_LITERAL:
       case S_QUOTED_IDENTIFIER:
-      case 96:
-      case 109:
+      case 97:
       case 110:
+      case 111:
         e = SQLSimpleExpression();
       //PY.Gibello 21 Apr 2001 - added e.toString() as arg
       it = new ZSelectItem(e.toString());
@@ -1172,13 +1187,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   String s, s2;
     if (jj_2_3(2)) {
       s = OracleObjectName();
-      jj_consume_token(112);
+      jj_consume_token(113);
                                {if (true) return new String(s + ".*");}
     } else if (jj_2_4(4)) {
       s = OracleObjectName();
-      jj_consume_token(101);
+      jj_consume_token(102);
       s2 = OracleObjectName();
-      jj_consume_token(112);
+      jj_consume_token(113);
     {if (true) return new String(s + "." + s2 + ".*");}
     } else {
       jj_consume_token(-1);
@@ -1197,14 +1212,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_9:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[54] = jj_gen;
         break label_9;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       f = FromItem();
                            v.add(f);
     }
@@ -1319,10 +1334,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     }
     e = new ZExpression(t.toString());
     if (jj_2_5(2147483647)) {
-      jj_consume_token(96);
+      jj_consume_token(97);
       q = SelectWithoutOrder();
                                                   e.addOperand(q);
-      jj_consume_token(98);
+      jj_consume_token(99);
     } else {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case K_SELECT:
@@ -1388,14 +1403,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_10:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[64] = jj_gen;
         break label_10;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       e = SQLSimpleExpression();
                                      ob = new ZOrderBy(e);
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1435,14 +1450,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       label_11:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case 97:
+        case 98:
           ;
           break;
         default:
           jj_la1[67] = jj_gen;
           break label_11;
         }
-        jj_consume_token(97);
+        jj_consume_token(98);
         TableColumn();
       }
       break;
@@ -1523,9 +1538,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case S_BIND:
       case S_CHAR_LITERAL:
       case S_QUOTED_IDENTIFIER:
-      case 96:
-      case 109:
+      case 97:
       case 110:
+      case 111:
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case K_NOT:
           jj_consume_token(K_NOT);
@@ -1563,9 +1578,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       ;
     }
     jj_consume_token(K_EXISTS);
-    jj_consume_token(96);
+    jj_consume_token(97);
     q = SubQuery();
-    jj_consume_token(98);
+    jj_consume_token(99);
       ZExpression e1 = new ZExpression("EXISTS", q);
       if(not) e = new ZExpression("NOT", e1);
       else e = e1;
@@ -1583,9 +1598,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   List v;
   boolean prior = false;
     if (jj_2_7(2147483647)) {
-      jj_consume_token(96);
+      jj_consume_token(97);
       v = SQLExpressionList();
-      jj_consume_token(98);
+      jj_consume_token(99);
        eleft = new ZExpression(",");
        ((ZExpression)eleft).setOperands(v);
     } else {
@@ -1602,9 +1617,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case S_BIND:
       case S_CHAR_LITERAL:
       case S_QUOTED_IDENTIFIER:
-      case 96:
-      case 109:
+      case 97:
       case 110:
+      case 111:
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case K_PRIOR:
           jj_consume_token(K_PRIOR);
@@ -1631,23 +1646,23 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     case K_IS:
     case K_LIKE:
     case K_NOT:
-    case 100:
-    case 102:
+    case 101:
     case 103:
     case 104:
     case 105:
     case 106:
     case 107:
     case 108:
+    case 109:
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 100:
-      case 102:
+      case 101:
       case 103:
       case 104:
       case 105:
       case 106:
       case 107:
       case 108:
+      case 109:
         eright = SQLRelationalOperatorExpression();
         break;
       default:
@@ -1694,14 +1709,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_14:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 97:
+      case 98:
         ;
         break;
       default:
         jj_la1[79] = jj_gen;
         break label_14;
       }
-      jj_consume_token(97);
+      jj_consume_token(98);
       e = SQLSimpleExpressionOrPreparedCol();
                                                   v.add(e);
     }
@@ -1739,9 +1754,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         jj_la1[81] = jj_gen;
         ;
       }
-      jj_consume_token(96);
+      jj_consume_token(97);
       e1 = SubQuery();
-      jj_consume_token(98);
+      jj_consume_token(99);
             if(unaryOp == null) eright = e1;
             else eright = new ZExpression(unaryOp, e1);
     } else {
@@ -1758,10 +1773,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       case S_BIND:
       case S_CHAR_LITERAL:
       case S_QUOTED_IDENTIFIER:
-      case 96:
-      case 109:
+      case 97:
       case 110:
-      case 113:
+      case 111:
+      case 114:
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case K_PRIOR:
           jj_consume_token(K_PRIOR);
@@ -1799,13 +1814,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     case S_BIND:
     case S_CHAR_LITERAL:
     case S_QUOTED_IDENTIFIER:
-    case 96:
-    case 109:
+    case 97:
     case 110:
+    case 111:
       e = SQLSimpleExpression();
                                {if (true) return e;}
       break;
-    case 113:
+    case 114:
       e = PreparedCol();
                        {if (true) return e;}
       break;
@@ -1819,7 +1834,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
 // For prepared columns ("?")
   final public ZExp PreparedCol() throws ParseException {
-    jj_consume_token(113);
+    jj_consume_token(114);
         {if (true) return new ZExpression("?");}
     throw new Error("Missing return statement in function");
   }
@@ -1840,7 +1855,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     }
     jj_consume_token(K_IN);
          e = new ZExpression(not ? "NOT IN" : "IN");
-    jj_consume_token(96);
+    jj_consume_token(97);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case K_AVG:
     case K_COUNT:
@@ -1853,10 +1868,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     case S_BIND:
     case S_CHAR_LITERAL:
     case S_QUOTED_IDENTIFIER:
-    case 96:
-    case 109:
+    case 97:
     case 110:
-    case 113:
+    case 111:
+    case 114:
       v = SQLExpressionList();
                                  e.setOperands(v);
       break;
@@ -1869,7 +1884,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(98);
+    jj_consume_token(99);
     {if (true) return e;}
     throw new Error("Missing return statement in function");
   }
@@ -1967,9 +1982,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_15:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 109:
       case 110:
-      case 114:
+      case 111:
+      case 115:
         ;
         break;
       default:
@@ -1977,14 +1992,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         break label_15;
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 109:
-        op = jj_consume_token(109);
-        break;
       case 110:
         op = jj_consume_token(110);
         break;
-      case 114:
-        op = jj_consume_token(114);
+      case 111:
+        op = jj_consume_token(111);
+        break;
+      case 115:
+        op = jj_consume_token(115);
         break;
       default:
         jj_la1[92] = jj_gen;
@@ -2011,8 +2026,8 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_16:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 111:
-      case 115:
+      case 112:
+      case 116:
         ;
         break;
       default:
@@ -2020,11 +2035,11 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         break label_16;
       }
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 111:
-        op = jj_consume_token(111);
+      case 112:
+        op = jj_consume_token(112);
         break;
-      case 115:
-        op = jj_consume_token(115);
+      case 116:
+        op = jj_consume_token(116);
         break;
       default:
         jj_la1[94] = jj_gen;
@@ -2050,14 +2065,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     label_17:
     while (true) {
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 116:
+      case 117:
         ;
         break;
       default:
         jj_la1[95] = jj_gen;
         break label_17;
       }
-      op = jj_consume_token(116);
+      op = jj_consume_token(117);
       e2 = SQLUnaryExpression();
       if(single) e = new ZExpression(op.toString(), e1);
       single = false;
@@ -2072,14 +2087,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   Token op = null;
   ZExp e1, e;
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 109:
     case 110:
+    case 111:
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 109:
-        op = jj_consume_token(109);
-        break;
       case 110:
         op = jj_consume_token(110);
+        break;
+      case 111:
+        op = jj_consume_token(111);
         break;
       default:
         jj_la1[96] = jj_gen;
@@ -2127,14 +2142,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
       } else if (jj_2_14(3)) {
         jj_consume_token(K_COUNT);
-        jj_consume_token(96);
-        jj_consume_token(111);
-        jj_consume_token(98);
+        jj_consume_token(97);
+        jj_consume_token(112);
+        jj_consume_token(99);
      {if (true) return new ZExpression("COUNT",
       new ZConstant("*", ZConstant.COLUMNNAME));}
       } else if (jj_2_15(3)) {
         s = AggregateFunc();
-        jj_consume_token(96);
+        jj_consume_token(97);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case K_ALL:
           jj_consume_token(K_ALL);
@@ -2150,7 +2165,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
           throw new ParseException();
         }
         s2 = TableColumn();
-        jj_consume_token(98);
+        jj_consume_token(99);
        {if (true) return new ZExpression(s, new ZConstant(modifier + s2, ZConstant.COLUMNNAME));}
       } else if (jj_2_16(2)) {
         e = FunctionCall();
@@ -2177,10 +2192,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
           t = jj_consume_token(S_BIND);
                   {if (true) return new ZConstant(t.toString(), ZConstant.STRING);}
           break;
-        case 96:
-          jj_consume_token(96);
+        case 97:
+          jj_consume_token(97);
           e = SQLExpression();
-          jj_consume_token(98);
+          jj_consume_token(99);
                                  {if (true) return e;}
           break;
         default:
@@ -2248,7 +2263,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_consume_token(-1);
       throw new ParseException();
     }
-    jj_consume_token(96);
+    jj_consume_token(97);
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
     case K_AVG:
     case K_COUNT:
@@ -2261,17 +2276,17 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     case S_BIND:
     case S_CHAR_LITERAL:
     case S_QUOTED_IDENTIFIER:
-    case 96:
-    case 109:
+    case 97:
     case 110:
-    case 113:
+    case 111:
+    case 114:
       parm = SQLExpressionList();
       break;
     default:
       jj_la1[103] = jj_gen;
       ;
     }
-    jj_consume_token(98);
+    jj_consume_token(99);
     int nparm = ZUtils.isCustomFunction(s);
     if(nparm < 0) nparm = (ZUtils.isAggregate(s) ? 1 : -1);
     if(nparm < 0)
@@ -2294,13 +2309,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     // user.table.col
         s = OracleObjectName();
     switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-    case 101:
-      jj_consume_token(101);
+    case 102:
+      jj_consume_token(102);
       c = OracleObjectName();
                                     s += "." + c;
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case 101:
-        jj_consume_token(101);
+      case 102:
+        jj_consume_token(102);
         c = OracleObjectName();
                                     s += "." + c;
         break;
@@ -2313,9 +2328,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1[105] = jj_gen;
       ;
     }
-    jj_consume_token(96);
-    jj_consume_token(109);
-    jj_consume_token(98);
+    jj_consume_token(97);
+    jj_consume_token(110);
+    jj_consume_token(99);
       {if (true) return s + "(+)";}
     throw new Error("Missing return statement in function");
   }
@@ -2439,96 +2454,6 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     finally { jj_save(15, xla); }
   }
 
-  private boolean jj_3R_64() {
-    if (jj_scan_token(S_CHAR_LITERAL)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_63() {
-    if (jj_scan_token(S_NUMBER)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_122() {
-    if (jj_3R_85()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_62() {
-    if (jj_3R_67()) return true;
-    return false;
-  }
-
-  private boolean jj_3_12() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(7)) {
-    jj_scanpos = xsp;
-    if (jj_scan_token(5)) {
-    jj_scanpos = xsp;
-    if (jj_3R_26()) return true;
-    }
-    }
-    return false;
-  }
-
-  private boolean jj_3R_132() {
-    if (jj_scan_token(K_PRIOR)) return true;
-    return false;
-  }
-
-  private boolean jj_3_16() {
-    if (jj_3R_31()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_109() {
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_132()) jj_scanpos = xsp;
-    if (jj_3R_39()) return true;
-    return false;
-  }
-
-  private boolean jj_3R_29() {
-    if (jj_scan_token(K_ALL)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_121() {
-    if (jj_scan_token(96)) return true;
-    if (jj_3R_85()) return true;
-    if (jj_scan_token(98)) return true;
-    return false;
-  }
-
-  private boolean jj_3_13() {
-    if (jj_3R_27()) return true;
-    return false;
-  }
-
-  private boolean jj_3_15() {
-    if (jj_3R_28()) return true;
-    if (jj_scan_token(96)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_3R_29()) {
-    jj_scanpos = xsp;
-    if (jj_3R_30()) return true;
-    }
-    if (jj_3R_67()) return true;
-    if (jj_scan_token(98)) return true;
-    return false;
-  }
-
-  private boolean jj_3R_120() {
-    if (jj_scan_token(K_UNION)) return true;
-    Token xsp;
-    xsp = jj_scanpos;
-    if (jj_scan_token(5)) jj_scanpos = xsp;
-    return false;
-  }
-
   private boolean jj_3R_136() {
     if (jj_scan_token(K_ALL)) return true;
     return false;
@@ -2549,9 +2474,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     xsp = jj_scanpos;
     if (jj_3R_120()) {
     jj_scanpos = xsp;
-    if (jj_scan_token(37)) {
+    if (jj_scan_token(38)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(47)) return true;
+    if (jj_scan_token(48)) return true;
     }
     }
     xsp = jj_scanpos;
@@ -2564,9 +2489,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
   private boolean jj_3_14() {
     if (jj_scan_token(K_COUNT)) return true;
-    if (jj_scan_token(96)) return true;
-    if (jj_scan_token(111)) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(97)) return true;
+    if (jj_scan_token(112)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -2574,14 +2499,14 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_131()) jj_scanpos = xsp;
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     if (jj_3R_81()) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
   private boolean jj_3R_135() {
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
     return false;
   }
@@ -2666,27 +2591,27 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_130() {
-    if (jj_scan_token(108)) return true;
+    if (jj_scan_token(109)) return true;
     return false;
   }
 
   private boolean jj_3R_129() {
-    if (jj_scan_token(107)) return true;
+    if (jj_scan_token(108)) return true;
     return false;
   }
 
   private boolean jj_3R_128() {
-    if (jj_scan_token(106)) return true;
+    if (jj_scan_token(107)) return true;
     return false;
   }
 
   private boolean jj_3R_127() {
-    if (jj_scan_token(105)) return true;
+    if (jj_scan_token(106)) return true;
     return false;
   }
 
   private boolean jj_3R_126() {
-    if (jj_scan_token(104)) return true;
+    if (jj_scan_token(105)) return true;
     return false;
   }
 
@@ -2698,7 +2623,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_125() {
-    if (jj_scan_token(103)) return true;
+    if (jj_scan_token(104)) return true;
     return false;
   }
 
@@ -2710,12 +2635,12 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_124() {
-    if (jj_scan_token(102)) return true;
+    if (jj_scan_token(103)) return true;
     return false;
   }
 
   private boolean jj_3R_123() {
-    if (jj_scan_token(100)) return true;
+    if (jj_scan_token(101)) return true;
     return false;
   }
 
@@ -2760,7 +2685,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_77() {
-    if (jj_scan_token(97)) return true;
+    if (jj_scan_token(98)) return true;
     if (jj_3R_39()) return true;
     return false;
   }
@@ -2793,9 +2718,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   private boolean jj_3R_58() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(109)) {
+    if (jj_scan_token(110)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(110)) return true;
+    if (jj_scan_token(111)) return true;
     }
     return false;
   }
@@ -2815,13 +2740,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_73() {
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
     return false;
   }
 
   private boolean jj_3R_69() {
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -2858,7 +2783,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_56() {
-    if (jj_scan_token(116)) return true;
+    if (jj_scan_token(117)) return true;
     if (jj_3R_55()) return true;
     return false;
   }
@@ -2919,7 +2844,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_102() {
-    if (jj_scan_token(97)) return true;
+    if (jj_scan_token(98)) return true;
     if (jj_3R_101()) return true;
     return false;
   }
@@ -2930,9 +2855,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3_7() {
-    if (jj_scan_token(96)) return true;
-    if (jj_3R_21()) return true;
     if (jj_scan_token(97)) return true;
+    if (jj_3R_21()) return true;
+    if (jj_scan_token(98)) return true;
     return false;
   }
 
@@ -2958,18 +2883,18 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   private boolean jj_3R_51() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(111)) {
+    if (jj_scan_token(112)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(115)) return true;
+    if (jj_scan_token(116)) return true;
     }
     if (jj_3R_50()) return true;
     return false;
   }
 
   private boolean jj_3R_82() {
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     if (jj_3R_74()) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -2997,15 +2922,15 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
   private boolean jj_3_4() {
     if (jj_3R_19()) return true;
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
-    if (jj_scan_token(112)) return true;
+    if (jj_scan_token(113)) return true;
     return false;
   }
 
   private boolean jj_3_3() {
     if (jj_3R_19()) return true;
-    if (jj_scan_token(112)) return true;
+    if (jj_scan_token(113)) return true;
     return false;
   }
 
@@ -3042,11 +2967,11 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   private boolean jj_3R_36() {
     Token xsp;
     xsp = jj_scanpos;
-    if (jj_scan_token(109)) {
-    jj_scanpos = xsp;
     if (jj_scan_token(110)) {
     jj_scanpos = xsp;
-    if (jj_scan_token(114)) return true;
+    if (jj_scan_token(111)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(115)) return true;
     }
     }
     if (jj_3R_35()) return true;
@@ -3085,9 +3010,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     xsp = jj_scanpos;
     if (jj_3R_34()) jj_scanpos = xsp;
     if (jj_scan_token(K_EXISTS)) return true;
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     if (jj_3R_81()) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -3108,10 +3033,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
   private boolean jj_3_1() {
     Token xsp;
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     while (true) {
       xsp = jj_scanpos;
-      if (jj_scan_token(96)) { jj_scanpos = xsp; break; }
+      if (jj_scan_token(97)) { jj_scanpos = xsp; break; }
     }
     if (jj_scan_token(K_SELECT)) return true;
     return false;
@@ -3208,7 +3133,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_42() {
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
     Token xsp;
     xsp = jj_scanpos;
@@ -3217,7 +3142,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_54() {
-    if (jj_scan_token(101)) return true;
+    if (jj_scan_token(102)) return true;
     if (jj_3R_19()) return true;
     return false;
   }
@@ -3233,7 +3158,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_114() {
-    if (jj_scan_token(97)) return true;
+    if (jj_scan_token(98)) return true;
     if (jj_3R_113()) return true;
     return false;
   }
@@ -3243,9 +3168,9 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     Token xsp;
     xsp = jj_scanpos;
     if (jj_3R_42()) jj_scanpos = xsp;
-    if (jj_scan_token(96)) return true;
-    if (jj_scan_token(109)) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(97)) return true;
+    if (jj_scan_token(110)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -3260,7 +3185,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_99() {
-    if (jj_scan_token(111)) return true;
+    if (jj_scan_token(112)) return true;
     return false;
   }
 
@@ -3362,10 +3287,10 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     jj_scanpos = xsp;
     if (jj_3R_49()) return true;
     }
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     xsp = jj_scanpos;
     if (jj_3R_70()) jj_scanpos = xsp;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -3422,13 +3347,13 @@ public class ZqlJJParser implements ZqlJJParserConstants {
     xsp = jj_scanpos;
     if (jj_3R_37()) jj_scanpos = xsp;
     if (jj_scan_token(K_IN)) return true;
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     xsp = jj_scanpos;
     if (jj_3R_110()) {
     jj_scanpos = xsp;
     if (jj_3R_111()) return true;
     }
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -3482,20 +3407,20 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3R_26() {
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     if (jj_scan_token(K_SELECT)) return true;
     return false;
   }
 
   private boolean jj_3R_57() {
-    if (jj_scan_token(113)) return true;
+    if (jj_scan_token(114)) return true;
     return false;
   }
 
   private boolean jj_3R_66() {
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     if (jj_3R_68()) return true;
-    if (jj_scan_token(98)) return true;
+    if (jj_scan_token(99)) return true;
     return false;
   }
 
@@ -3515,7 +3440,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   }
 
   private boolean jj_3_5() {
-    if (jj_scan_token(96)) return true;
+    if (jj_scan_token(97)) return true;
     return false;
   }
 
@@ -3531,6 +3456,96 @@ public class ZqlJJParser implements ZqlJJParserConstants {
 
   private boolean jj_3R_52() {
     if (jj_3R_21()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_64() {
+    if (jj_scan_token(S_CHAR_LITERAL)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_63() {
+    if (jj_scan_token(S_NUMBER)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_122() {
+    if (jj_3R_85()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_62() {
+    if (jj_3R_67()) return true;
+    return false;
+  }
+
+  private boolean jj_3_12() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(7)) {
+    jj_scanpos = xsp;
+    if (jj_scan_token(5)) {
+    jj_scanpos = xsp;
+    if (jj_3R_26()) return true;
+    }
+    }
+    return false;
+  }
+
+  private boolean jj_3R_132() {
+    if (jj_scan_token(K_PRIOR)) return true;
+    return false;
+  }
+
+  private boolean jj_3_16() {
+    if (jj_3R_31()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_109() {
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_132()) jj_scanpos = xsp;
+    if (jj_3R_39()) return true;
+    return false;
+  }
+
+  private boolean jj_3R_29() {
+    if (jj_scan_token(K_ALL)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_121() {
+    if (jj_scan_token(97)) return true;
+    if (jj_3R_85()) return true;
+    if (jj_scan_token(99)) return true;
+    return false;
+  }
+
+  private boolean jj_3_13() {
+    if (jj_3R_27()) return true;
+    return false;
+  }
+
+  private boolean jj_3_15() {
+    if (jj_3R_28()) return true;
+    if (jj_scan_token(97)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_3R_29()) {
+    jj_scanpos = xsp;
+    if (jj_3R_30()) return true;
+    }
+    if (jj_3R_67()) return true;
+    if (jj_scan_token(99)) return true;
+    return false;
+  }
+
+  private boolean jj_3R_120() {
+    if (jj_scan_token(K_UNION)) return true;
+    Token xsp;
+    xsp = jj_scanpos;
+    if (jj_scan_token(5)) jj_scanpos = xsp;
     return false;
   }
 
@@ -3557,16 +3572,16 @@ public class ZqlJJParser implements ZqlJJParserConstants {
       jj_la1_init_3();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x10008000,0x0,0x0,0x1010b000,0x9220000,0x8000000,0x9220000,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x2000000,0x0,0x0,0x2000000,0x0,0x0,0x0,0x4080400,0x0,0x0,0x0,0x40000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20000000,0x800020,0x800020,0x0,0x40000,0x80000000,0x0,0x0,0x80400,0x100,0x80400,0x100,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x0,0x0,0x400200,0x400200,0x0,0x400200,0x400200,0x0,0x0,0x0,0x40,0x0,0x80400,0x0,0x0,0x80400,0x0,0x0,0x800,0x0,0xa0,0xa0,0x0,0x80400,0x80400,0x0,0x80400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800020,0x0,0x0,0x80400,0x80400,0x80400,0x0,0x0,};
+      jj_la1_0 = new int[] {0x20008000,0x0,0x0,0x2010b000,0x19220000,0x8000000,0x19220000,0x0,0x10000,0x0,0x0,0x0,0x0,0x0,0x10000,0x0,0x2000000,0x0,0x0,0x2000000,0x0,0x0,0x0,0x4080400,0x0,0x0,0x0,0x80000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x40000000,0x800020,0x800020,0x0,0x40000,0x0,0x0,0x0,0x80400,0x100,0x80400,0x100,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x20,0x0,0x0,0x400200,0x400200,0x0,0x400200,0x400200,0x0,0x0,0x0,0x40,0x0,0x80400,0x0,0x0,0x80400,0x0,0x0,0x800,0x0,0xa0,0xa0,0x0,0x80400,0x80400,0x0,0x80400,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800020,0x0,0x0,0x80400,0x80400,0x80400,0x0,0x0,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x40220010,0x0,0x0,0x40220010,0x90001c08,0x10000000,0x90001c08,0x0,0x0,0x0,0x0,0x80000,0x0,0x0,0x0,0x1000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x8146000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200,0x800000,0x4000000,0x0,0x0,0x0,0x0,0x0,0x0,0x8020,0x0,0x106000,0x0,0x106000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1,0x0,0x8020,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400000,0x2000000,0x0,0x40000,0x8146000,0x40000,0x8000000,0x8106000,0x0,0x80,0x40186,0x0,0x0,0x0,0x8000000,0x8106000,0x106000,0x40000,0x106000,0x40000,0x40000,0x40000,0x40000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x100000,0x0,0x6000,0x6000,0x106000,0x0,0x0,};
+      jj_la1_1 = new int[] {0x80440020,0x0,0x0,0x80440020,0x20003810,0x20000000,0x20003810,0x0,0x0,0x0,0x0,0x100000,0x0,0x0,0x0,0x2000000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x1028c000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x400,0x1000000,0x8000000,0x0,0x0,0x0,0x0,0x0,0x1,0x10040,0x0,0x20c000,0x0,0x20c000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x10040,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x800000,0x4000000,0x0,0x80000,0x1028c000,0x80000,0x10000000,0x1020c000,0x0,0x100,0x8030c,0x0,0x0,0x0,0x10000000,0x1020c000,0x20c000,0x80000,0x20c000,0x80000,0x80000,0x80000,0x80000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x200000,0x0,0xc000,0xc000,0x20c000,0x0,0x0,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0xc000,0x0,0x0,0xc000,0x180e,0x0,0x180e,0x40000,0x0,0x0,0x0,0x0,0x0,0x40000,0x0,0x80000,0x10,0x801,0x801,0x11,0x4000000,0x10000,0x0,0xe4100080,0x0,0x0,0x2004,0x0,0x10000,0x0,0x0,0x84000000,0x0,0x0,0x0,0x0,0x4100000,0x0,0x0,0x0,0x0,0x0,0x0,0x10000,0x40,0x0,0x400,0x0,0xe4100080,0x84000000,0xe4100080,0x0,0x4000000,0x84000000,0x0,0x4000000,0x40,0x40,0x0,0x0,0x400,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xe4100080,0x0,0x0,0xe4100080,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xe4100080,0xe4100080,0x0,0xe4100084,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xe4100000,0x80,0x4000080,0xe4100080,0x0,0x0,};
+      jj_la1_2 = new int[] {0x18000,0x0,0x0,0x18000,0x301d,0x0,0x301d,0x80000,0x0,0x0,0x0,0x0,0x0,0x80000,0x0,0x100000,0x20,0x1002,0x1002,0x22,0x8000000,0x20000,0x0,0xc8200100,0x0,0x0,0x4008,0x0,0x20000,0x0,0x0,0x8000000,0x0,0x0,0x0,0x0,0x8200000,0x0,0x0,0x0,0x0,0x0,0x0,0x20000,0x80,0x0,0x800,0x0,0xc8200100,0x8000000,0xc8200100,0x0,0x8000000,0x8000000,0x0,0x8000000,0x80,0x80,0x0,0x0,0x800,0x8,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc8200100,0x0,0x0,0xc8200100,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc8200100,0xc8200100,0x0,0xc8200108,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0xc8200000,0x100,0x8000100,0xc8200100,0x0,0x0,};
    }
    private static void jj_la1_init_3() {
-      jj_la1_3 = new int[] {0x0,0x2,0x1,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x2,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x26001,0x2,0x1,0x0,0x0,0x0,0x20,0x20,0x0,0x1fd0,0x20,0x6000,0x6000,0x6000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0xe001,0x0,0x6001,0x0,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x2,0x0,0x0,0x2,0x0,0x0,0x0,0x0,0x6001,0x0,0x0,0x6001,0x1fd0,0x0,0x1fd0,0x2,0x0,0x0,0x0,0x26001,0x26001,0x0,0x26001,0x0,0x0,0x0,0x0,0x46000,0x46000,0x88000,0x88000,0x100000,0x6000,0x6000,0x0,0x0,0x1,0x0,0x0,0x26001,0x20,0x20,};
+      jj_la1_3 = new int[] {0x0,0x4,0x2,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x4,0x0,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x4c003,0x4,0x2,0x0,0x0,0x0,0x40,0x40,0x1,0x3fa0,0x40,0xc000,0xc000,0xc000,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x1c003,0x1,0xc003,0x0,0x0,0x1,0x4,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x4,0x0,0x0,0x4,0x0,0x0,0x0,0x0,0xc003,0x0,0x0,0xc003,0x3fa0,0x0,0x3fa0,0x4,0x0,0x0,0x0,0x4c003,0x4c003,0x0,0x4c003,0x0,0x0,0x0,0x0,0x8c000,0x8c000,0x110000,0x110000,0x200000,0xc000,0xc000,0x0,0x0,0x3,0x0,0x0,0x4c003,0x40,0x40,};
    }
   final private JJCalls[] jj_2_rtns = new JJCalls[16];
   private boolean jj_rescan = false;
@@ -3752,7 +3767,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
   /** Generate ParseException. */
   public ParseException generateParseException() {
     jj_expentries.clear();
-    boolean[] la1tokens = new boolean[117];
+    boolean[] la1tokens = new boolean[118];
     if (jj_kind >= 0) {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
@@ -3775,7 +3790,7 @@ public class ZqlJJParser implements ZqlJJParserConstants {
         }
       }
     }
-    for (int i = 0; i < 117; i++) {
+    for (int i = 0; i < 118; i++) {
       if (la1tokens[i]) {
         jj_expentry = new int[1];
         jj_expentry[0] = i;
