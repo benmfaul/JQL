@@ -1,0 +1,1 @@
+java -classpath "./*" org.mozilla.javascript.tools.shell.Main 
