@@ -49,7 +49,7 @@ import org.mozilla.javascript.Scriptable;
 import org.mozilla.javascript.ScriptRuntime;
 import org.mozilla.javascript.ScriptableObject;
 
-import java.util.Vector;
+import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Properties;
 
@@ -119,12 +119,11 @@ public class Environment extends ScriptableObject
     private Object[] collectIds() {
         Properties props = System.getProperties();
         Enumeration names = props.propertyNames();
-        Vector keys = new Vector();
+        ArrayList keys = new ArrayList();
         while (names.hasMoreElements())
-            keys.addElement(names.nextElement());
-        Object[] ids = new Object[keys.size()];
-        keys.copyInto(ids);
-        return ids;
+            keys.add(names.nextElement());
+        	Object[] ids = new Object[keys.size()];
+        	return ids;
     }
 
     public Object[] getIds() {

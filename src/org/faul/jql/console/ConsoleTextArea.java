@@ -38,6 +38,7 @@
 package org.faul.jql.console;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -156,7 +157,7 @@ public class ConsoleTextArea
     private PrintStream err;
     private PrintWriter inPipe;
     private PipedInputStream in;
-    private java.util.Vector history;
+    private ArrayList<String> history;
     private int historyIndex = -1;
     private int outputMark = 0;
 
@@ -172,7 +173,7 @@ public class ConsoleTextArea
      */
     public ConsoleTextArea(String[] argv) {
         super();
-        history = new java.util.Vector();
+        history = new ArrayList<>();
         console1 = new ConsoleWriter(this);
         console2 = new ConsoleWriter(this);
         out = new PrintStream(console1);
@@ -205,7 +206,7 @@ public class ConsoleTextArea
             ignored.printStackTrace();
         }
         if(segment.count > 0) {
-            history.addElement(segment.toString());
+            history.add(segment.toString());
         }
         historyIndex = history.size();
         inPipe.write(segment.array, segment.offset, segment.count);
@@ -262,7 +263,7 @@ public class ConsoleTextArea
                     historyIndex = history.size() -1;
                 }
                 if(historyIndex >= 0) {
-                    String str = (String)history.elementAt(historyIndex);
+                    String str = (String)history.get(historyIndex);
                     int len = getDocument().getLength();
                     replaceRange(str, outputMark, len);
                     int caretPos = outputMark + str.length();
@@ -281,7 +282,7 @@ public class ConsoleTextArea
                 if(historyIndex < 0) {historyIndex = 0;}
                 int len = getDocument().getLength();
                 if(historyIndex < history.size()) {
-                    String str = (String)history.elementAt(historyIndex);
+                    String str = (String)history.get(historyIndex);
                     replaceRange(str, outputMark, len);
                     caretPos = outputMark + str.length();
                 } else {

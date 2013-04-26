@@ -19,6 +19,7 @@ package org.gibello.zql;
 
 import java.io.*;
 import java.util.*;
+import java.util.Map.Entry;
 
 /**
  * ZUpdate: an SQL UPDATE statement.
@@ -27,7 +28,7 @@ public class ZUpdate implements ZStatement {
 
   String table_;
   String alias_ = null;
-  Hashtable set_;
+  HashMap set_;
   ZExp where_ = null;
   Vector columns_ = null;
 
@@ -52,7 +53,7 @@ public class ZUpdate implements ZStatement {
    * For example, the values may be ZConstant objects (like "Smith") or
    * more complex SQL Expressions.
    */
-  public void addSet(Hashtable t) {
+  public void addSet(HashMap t) {
     set_ = t;
   }
 
@@ -62,7 +63,7 @@ public class ZUpdate implements ZStatement {
    * and values are ZExp objects (Expressions that specify column values: for
    * example, ZConstant objects like "Smith").
    */
-  public Hashtable getSet() { return set_; }
+  public HashMap getSet() { return set_; }
 
   /**
    * Add one column=value pair to the SET... clause
@@ -71,7 +72,7 @@ public class ZUpdate implements ZStatement {
    * @param val The column value
    */
   public void addColumnUpdate(String col, ZExp val) {
-    if(set_ == null) set_ = new Hashtable();
+    if(set_ == null) set_ = new HashMap();
     set_.put(col, val);
     if(columns_ == null) columns_ = new Vector();
     columns_.addElement(col);
@@ -142,12 +143,12 @@ public class ZUpdate implements ZStatement {
     if(alias_ != null) buf.append(" " + alias_);
     buf.append(" set ");
 
-    Enumeration e;
-    if(columns_ != null) e = columns_.elements();
-    else e = set_.keys();
+    Iterator e = set_.entrySet().iterator();
     boolean first = true;
-    while(e.hasMoreElements()) {
-      String key = e.nextElement().toString();
+    while(e.hasNext()) {
+    	
+    	Entry entry = (Entry)e.next();
+      String key = entry.getKey().toString();
       if(!first) buf.append(", ");
       buf.append(key + "=" + set_.get(key).toString()); 
       first = false;

@@ -17,16 +17,16 @@
 
 package org.gibello.zql;
 
-import java.util.Hashtable;
+import java.util.HashMap;
 
 public class ZUtils {
 
-  private static Hashtable fcts_ = null;
+  private static HashMap<String,Number> fcts_ = null;
 
   public static final int VARIABLE_PLIST = 10000;
 
   public static void addCustomFunction(String fct, int nparm) {
-    if(fcts_ == null) fcts_ = new Hashtable();
+    if(fcts_ == null) fcts_ = new HashMap<String,Number>();
     if(nparm < 0) nparm = 1;
     fcts_.put(fct.toUpperCase(), new Integer(nparm));
   }

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 
 import org.faul.jql.utils.RemoteObjectHandler;
@@ -437,9 +438,11 @@ public class Jql {
 		List<String> list = new ArrayList<String>();
 		Set keys = dbMap.keySet();
 		Iterator it = keys.iterator();
-		while (it.hasNext()) {
-			list.add((String) it.next());
+		
+		for (Entry<String, Map<String, Object>> skeys : dbMap.entrySet()) {
+			list.add(skeys.getKey());
 		}
+
 		return list;
 	}
 
@@ -909,12 +912,10 @@ public class Jql {
 	 */
 	public List<Map> listTables() throws Exception {
 		List<Map> list = new ArrayList();
-		Set set = tableMap.keySet();
-		Iterator it = set.iterator();
-		ArrayList<String> keys = new ArrayList<String>();
-		while(it.hasNext()) {
-			String key = (String)it.next();
-			List records = (List)tableMap.get(key);
+		
+		for (Entry<String, Object> entry : tableMap.entrySet()) {
+			String key = entry.getKey();
+			List records = (List)entry.getValue();
 			Map nr = new HashMap();
 			nr.put("name",key);
 			nr.put("count",records.size());
@@ -1187,7 +1188,8 @@ public class Jql {
 		Set set = m.keySet();
 		Iterator it = set.iterator();
 		String[] keys = new String[m.size()];
-		int j = 0;
+		int j = 0;	
+		
 		while (it.hasNext()) {
 			keys[j++] = (String) it.next();
 		}

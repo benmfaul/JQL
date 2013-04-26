@@ -19,11 +19,12 @@ package org.faul.jql.core;
 
 import java.util.ArrayList;
 
-import java.util.Enumeration;
+
 import java.util.HashMap;
-import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.gibello.zql.ZExp;
 import org.gibello.zql.ZUpdate;
@@ -95,12 +96,12 @@ public class JUpdate extends JCommon {
 		 * Create the setter map. This is two arrays where column[i] is the fieldname @i
 		 * and values[i] is the value @i.
 		 */
-		Hashtable items = z.getSet();
-		Enumeration it = items.keys();
+		HashMap items = z.getSet();
+		Iterator<String> it = items.keySet().iterator();
 		List<String> columns = new ArrayList<String>();
 		List values = new ArrayList();
-		while(it.hasMoreElements()) {
-			String column = (String)it.nextElement();
+		while(it.hasNext()) {
+			String column = (String)it.next();
 			columns.add(column);
 			values.add(items.get(column));
 		}
