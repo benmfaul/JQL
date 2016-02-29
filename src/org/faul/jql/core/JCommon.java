@@ -28,6 +28,9 @@ import org.gibello.zql.ZFromItem;
 import org.gibello.zql.data.ZEval;
 import org.gibello.zql.data.ZTuple;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 /**
@@ -36,6 +39,12 @@ import com.google.gson.Gson;
  *
  */
 public class JCommon {
+	
+	static ObjectMapper mapper = new ObjectMapper();
+	static {
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	}
 	
 	void setTableMap(Map<String, Map<String,Object>> dbMap, ZFromItem table) {
 		if (table.getSchema() != null)
@@ -150,7 +159,7 @@ public class JCommon {
 		return value;
 	}
 	
-	Gson gson = Jql.gson;		// use the same Gson object
+	//Gson gson = Jql.gson;		// use the same Gson object
 	
 	Map<String,Object> tableMap = null;		// the tableMap, maps Java objects to table names.
 	
@@ -173,7 +182,7 @@ public class JCommon {
 		if (source instanceof ArrayList) {
 			return source;
 		}
-		return  gson.fromJson((String) source, Object.class);
+		return  mapper.readValue((String)source,Object.class);
 	}
 	
 	/**
@@ -188,7 +197,7 @@ public class JCommon {
 		int rc = fr.read(buf);
 		fr.close();
 		data = new String(buf, 0, rc);
-		Object rets = gson.fromJson(data, Object.class);
+		Object rets = mapper.readValue((String)data,Object.class);
 		if (rets instanceof ArrayList == false) {
 			throw new Exception("List class not returned!");
 		}
@@ -201,7 +210,7 @@ public class JCommon {
 	 * @param zcon ZConstant. The SQL constant object.
 	 * @return Object. The value represented by the object. 
 	 */
-	public Object returnValueFromConstant(ZConstant zcon) {
+	public Object returnValueFromConstant(ZConstant zcon) throws Exception {
 		Object oval = null;
 		String sval = zcon.getValue();
 		switch(zcon.getType()) {
@@ -219,7 +228,7 @@ public class JCommon {
 			sval=sval.toLowerCase();
 			if (sval.startsWith("json::")) {
 				sval = sval.substring(6);
-				oval = gson.fromJson(sval, Object.class);
+				oval = mapper.readValue(sval,Object.class);
 			}
 			break;
 		case ZConstant.NULL:

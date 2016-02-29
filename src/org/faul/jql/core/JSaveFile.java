@@ -70,7 +70,10 @@ public class JSaveFile extends JCommon {
 			db.remove("intermediate"); 
 		}
 		
-		String data = this.gson.toJson(dbMap);
+		String data =  mapper
+				.writer()
+				.withDefaultPrettyPrinter()
+				.writeValueAsString(dbMap);
 		
 		for (String key : keys) {
 			Map db = dbMap.get(key);

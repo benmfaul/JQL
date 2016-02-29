@@ -27,7 +27,7 @@
 	</target>
 
 	<target name="validate">
-		<available property="classpath_id" value="base.libraries" file="${applib.dir}/js-17.jar"/>
+		<available property="classpath_id" value="base.libraries" file="${applib.dir}/rhino-1.7.7.1.jar"/>
 	</target>
 
 	<target name="prepare" depends="clean,validate">	

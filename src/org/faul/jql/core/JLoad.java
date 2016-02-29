@@ -84,7 +84,7 @@ public class JLoad extends JCommon {
 		} catch (Exception error) {
 			
 		}
-		Map load  = (Map)gson.fromJson(sbuf.toString(),Object.class);
+		Map load  =  mapper.readValue(sbuf.toString(),Map.class); 
 		Set keys = load.keySet();
 		Iterator it = keys.iterator();
 		String key = (String)it.next();

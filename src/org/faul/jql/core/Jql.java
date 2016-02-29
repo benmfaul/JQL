@@ -18,10 +18,9 @@
 package org.faul.jql.core;
 
 import java.io.ByteArrayInputStream;
-
 import java.io.FileReader;
+import java.io.IOException;
 import java.io.InputStream;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -32,7 +31,6 @@ import java.util.Set;
 
 import org.faul.jql.utils.RemoteObjectHandler;
 import org.gibello.zql.ZFromItem;
-
 import org.gibello.zql.ZDelete;
 import org.gibello.zql.ZDropTable;
 import org.gibello.zql.ZInsert;
@@ -51,6 +49,11 @@ import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Function;
 import org.mozilla.javascript.Scriptable;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -63,19 +66,22 @@ import com.google.gson.GsonBuilder;
  */
 public class Jql {
 
-	static transient Gson gson = null;
+	//static transient Gson gson = null;
 	static transient Gson gsonPretty = null;
 	static transient GsonBuilder gx = new GsonBuilder();// The static json
 
 	static Gson nopretty = new Gson();
 	static String sepCSV = ",";
 
-	// transient used to
-	// Encoder/Decoder for Map<String,Object>
+	public static ObjectMapper mapper = new ObjectMapper();
+	static {
+		mapper.setSerializationInclusion(Include.NON_NULL);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+	}
+	
 	static {
 		gx.registerTypeAdapter(Object.class, new RemoteObjectHandler());
 		gsonPretty = gx.setPrettyPrinting().create();
-		gson = gx.create();
 	}
 
 	/**
@@ -88,7 +94,7 @@ public class Jql {
 	 *             exception on badly formed JSON data.
 	 */
 	public static Map<String, Object> fromJson(String data) throws Exception {
-		return (Map<String, Object>) gson.fromJson(data, Object.class);
+		return (Map<String, Object>) mapper.readValue(data,Map.class);
 	}
 
 	/**
@@ -110,7 +116,10 @@ public class Jql {
 				FileReader fr = new FileReader(data);
 				return fr;
 			} else {
-				return gson.fromJson((String) source, Object.class);
+				String content = mapper
+						.writer()
+						.writeValueAsString(Object.class);
+				return content;
 			}
 		}
 		if (source instanceof ArrayList) {
@@ -120,8 +129,11 @@ public class Jql {
 		/**
 		 * Convert to arraylist;
 		 */
-		String data = gson.toJson(source);
-		return gson.fromJson(data, Object.class);
+
+		String data = mapper
+				.writer()
+				.writeValueAsString(source);
+		return mapper.readValue(data,List.class);
 	}
 
 	/**
@@ -136,7 +148,10 @@ public class Jql {
 	 *             string.
 	 */
 	public static String toJson(Object convert) throws Exception {
-		return gson.toJson(convert);
+		String content = mapper
+		.writer()
+		.writeValueAsString(convert);
+		return content;
 	}
 
 	/**
@@ -153,10 +168,15 @@ public class Jql {
 	 */
 	public static String toJson(Object convert, boolean pretty)
 			throws Exception {
-		if (pretty)
-			return gson.toJson(convert);
+		if (pretty) {
+			String content = mapper
+					.writer()
+					.withDefaultPrettyPrinter()
+					.writeValueAsString(convert);
+			return content;
+		}
 		else {
-			return nopretty.toJson(convert);
+			return toJson(convert);
 		}
 	}
 
@@ -281,7 +301,7 @@ public class Jql {
 	public void addRecord(String tableName, Object obj) throws Exception {
 		List list = null;
 		if (obj instanceof String) {
-			list = gson.fromJson((String) obj, List.class);
+			list =  mapper.readValue((String)obj,List.class);
 		} else
 			list = (List) obj;
 		List table = (List) tableMap.get(tableName);
@@ -334,7 +354,7 @@ public class Jql {
 		Map<String, Object> db = dbMap.get(dbName);
 		List list = null;
 		if (obj instanceof String) {
-			list = gson.fromJson((String) obj, List.class);
+			list = mapper.readValue((String) obj, List.class);
 		}
 		List records = (List) tableMap.get(table);
 		records.add(list);
@@ -776,13 +796,16 @@ public class Jql {
 	 *            String. The unformatted JSON to pretty print.
 	 * @return String. The formatted JSON.
 	 */
-	public String format(String data) {
+	public String format(String data) throws Exception {
 		String rets = null;
 		Object obj = tableMap.get(data);
 		if (obj == null) {
-			obj = gson.fromJson(data, Object.class);
+			obj=mapper.readValue(data,Object.class);
 		}
-		rets = gsonPretty.toJson(obj);
+		rets = mapper
+				.writer()
+				.withDefaultPrettyPrinter()
+				.writeValueAsString(obj);
 		return rets;
 	}
 
@@ -814,8 +837,11 @@ public class Jql {
 	 *            List<Map>. The table to append the CSV data to.
 	 * @param data
 	 *            . String. The CSV formatted data.
+	 * @throws IOException 
+	 * @throws JsonMappingException 
+	 * @throws JsonParseException 
 	 */
-	public void fromCSV(List<Map> list, String data) {
+	public void fromCSV(List<Map> list, String data) throws JsonParseException, JsonMappingException, IOException {
 		String[] tokens = null;
 		Map newmap = null;
 		String[] lines = data.split("\n");
@@ -844,7 +870,7 @@ public class Jql {
 						t = t.substring(1);
 						t = t.substring(0, t.length() - 1);
 					}
-					Object test = gson.fromJson(t, Object.class);
+					Object test = mapper.readValue(t, Object.class);
 					newmap.put(keys[j++], test);
 				}
 			}
@@ -875,7 +901,7 @@ public class Jql {
 	 * @param data
 	 *            String. CSV formatted data.
 	 */
-	public void fromCSV(String table, String data) {
+	public void fromCSV(String table, String data) throws Exception {
 		List list = (List) tableMap.get(table);
 		fromCSV(list, data);
 	}
@@ -1025,11 +1051,11 @@ public class Jql {
 	 *            String. The JSON string to format.
 	 * @return String. The formatted JSON data.
 	 */
-	public String prettyFormat(String data) {
+	public String prettyFormat(String data) throws Exception {
 		String rets = null;
 		Object obj = tableMap.get(data);
 		if (obj == null) {
-			obj = gson.fromJson(data, Object.class);
+			obj = mapper.readValue(data,Object.class);
 		}
 		rets = gsonPretty.toJson(obj);
 		return rets;
@@ -1053,7 +1079,7 @@ public class Jql {
 	 *            String. The JSON string to format.
 	 * @return String. The formatted JSON data.
 	 */
-	public String prettyPrint(String data) {
+	public String prettyPrint(String data) throws Exception {
 		return prettyFormat(data);
 	}
 
@@ -1182,7 +1208,7 @@ public class Jql {
 	 *            List<Map>. The map table to turn into CSV formatted string.
 	 * @return String. The CSV version of the table.
 	 */
-	public String toCSV(List<Map> list) {
+	public String toCSV(List<Map> list) throws Exception {
 		String buf = "";
 		Map m = list.get(0);
 		Set set = m.keySet();
@@ -1206,7 +1232,7 @@ public class Jql {
 	 *            String []. the column names to output.
 	 * @return String. The formatted CSV of the given table.
 	 */
-	public String toCSV(List<Map> list, String... tokens) {
+	public String toCSV(List<Map> list, String... tokens) throws Exception {
 		String output = "";
 		for (String token : tokens) {
 			output += token + ",";
@@ -1222,7 +1248,10 @@ public class Jql {
 				else if (o instanceof Double)
 					line += m.get(arg) + ",";
 				else {
-					String conv = gson.toJson(o);
+					String conv = mapper
+							.writer()
+							.withDefaultPrettyPrinter()
+							.writeValueAsString(list);
 					conv = conv.replaceAll("\n", " ");
 					line += "\"" + conv + "\",";
 				}
@@ -1241,7 +1270,7 @@ public class Jql {
 	 *            String. The name of the table to convert.
 	 * @return String. The table's CSV representation.
 	 */
-	public String toCSV(String table) {
+	public String toCSV(String table) throws Exception {
 		List<Map> list = (List) tableMap.get(table);
 		return toCSV(list);
 	}
@@ -1255,7 +1284,7 @@ public class Jql {
 	 *            String[] args. The columns to convert. Unmentioned keys are ignored.
 	 * @return String. The table converted to CSV as a string.
 	 */
-	public String toCSV(String table, String... args) {
+	public String toCSV(String table, String... args) throws Exception {
 		List<Map> list = (List) tableMap.get(table);
 		return toCSV(list, args);
 	}

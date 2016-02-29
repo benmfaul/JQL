@@ -1,1 +1,1 @@
-java -classpath "../libs/*" org.faul.jql.console.JSConsole
+java -cp "rhino-1.7.7.1.jar:xrtb-all.jar:jql-0.0.1.jar" org.faul.jql.console.JSConsole

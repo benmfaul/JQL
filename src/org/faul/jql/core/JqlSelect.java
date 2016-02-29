@@ -502,7 +502,7 @@ public class JqlSelect extends JCommon {
 	 * @return
 	 */
 	boolean distinctAlreadyContains(HashMap<String, HashMap> distincts,
-			List<String> keys, ZTuple candidateTuple) {
+			List<String> keys, ZTuple candidateTuple) throws Exception {
 		if (distincts == null)
 			return false;
 
@@ -526,12 +526,15 @@ public class JqlSelect extends JCommon {
 	 * @return
 	 */
 	boolean recurseKeyValues(Integer depth, List<String> keys, ZTuple tuple,
-			HashMap<String, HashMap> distincts) {
+			HashMap<String, HashMap> distincts) throws Exception {
 		String key = keys.get(depth);
 		depth++;
 
 		Object x = tuple.getAttValue(key);
-		String hashKey = gson.toJson(x);
+
+		String hashKey = mapper
+				.writer()
+				.writeValueAsString(x);
 		HashMap map = distincts.get(hashKey);
 		boolean seenBefore = true;
 		if (map == null) {
